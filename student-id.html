@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Sorsogon National High School</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+            rel="stylesheet"
+        />
+        <link href="assets/theme.css" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="assets/logo.ico" />
+        <style>
+            /* ID card preview styling (keeps the “dark green” brand feel) */
+            .id-wrap {
+                width: 3.375in; /* CR80 width (standard ID) */
+                height: 2.125in; /* CR80 height */
+                border-radius: 18px;
+                overflow: hidden;
+                border: 1px solid rgba(2, 6, 23, 0.12);
+                box-shadow: 0 12px 28px rgba(2, 6, 23, 0.08);
+                background: #fff;
+                position: relative;
+            }
+
+            .id-top {
+                height: 38%;
+                background: linear-gradient(160deg, #052e1a 0%, #064e2a 55%, #04301a 100%);
+                color: #fff;
+                padding: 12px 14px;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .id-logo {
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.14);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                display: grid;
+                place-items: center;
+                flex: 0 0 auto;
+                overflow: hidden;
+            }
+            .id-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .id-logo i {
+                font-size: 1.2rem;
+            }
+
+            .id-school {
+                line-height: 1.05;
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+            .id-school .name {
+                font-weight: 900;
+                font-size: 13px;
+                letter-spacing: 0.2px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .id-school .sub {
+                font-size: 10px;
+                opacity: 0.85;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .id-body {
+                height: 62%;
+                padding: 12px 14px;
+                display: flex;
+                gap: 12px;
+                align-items: flex-start;
+                position: relative;
+            }
+
+            .id-photo {
+                width: 62px;
+                height: 78px;
+                border-radius: 14px;
+                border: 1px solid rgba(2, 6, 23, 0.12);
+                background: #f3f6f4;
+                overflow: hidden;
+                display: grid;
+                place-items: center;
+                flex: 0 0 auto;
+            }
+            .id-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .id-photo .ph {
+                font-size: 10px;
+                color: #64748b;
+                text-align: center;
+                padding: 6px;
+            }
+
+            .id-info {
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
+            .id-student {
+                font-weight: 900;
+                font-size: 12px;
+                margin-bottom: 4px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .id-row {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 6px;
+            }
+
+            .pill {
+                font-size: 10px;
+                padding: 4px 8px;
+                border-radius: 999px;
+                border: 1px solid rgba(2, 6, 23, 0.1);
+                background: #f8fafc;
+                color: #0b1220;
+                font-weight: 800;
+            }
+
+            .id-meta {
+                font-size: 10px;
+                color: #64748b;
+                line-height: 1.2;
+            }
+
+            .id-footer {
+                position: absolute;
+                bottom: 10px;
+                right: 14px;
+                font-size: 9px;
+                color: rgba(2, 6, 23, 0.55);
+                font-weight: 700;
+            }
+
+            .id-watermark {
+                position: absolute;
+                right: -4px;
+                bottom: -12px;
+                font-weight: 900;
+                font-size: 44px;
+                color: rgba(18, 146, 79, 0.08);
+                transform: rotate(-12deg);
+                pointer-events: none;
+                user-select: none;
+                white-space: nowrap;
+            }
+
+            /* Make the preview centered and crisp */
+            .preview-shell {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 12px;
+                background: #fbfdfc;
+                border: 1px dashed rgba(2, 6, 23, 0.18);
+                border-radius: 18px;
+                min-height: 240px;
+            }
+
+            .id-scale {
+                transform: scale(2);
+                transform-origin: top center; /* keeps it centered nicely */
+            }
+
+            /* Adjust the preview container to fit the scaled card */
+            .preview-shell {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 40px; /* give space for scaling */
+                background: #fbfdfc;
+                border: 1px dashed rgba(2, 6, 23, 0.18);
+                border-radius: 18px;
+                min-height: 480px; /* doubled from 240px */
+                overflow: auto; /* prevents clipping */
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-admin py-3">
+            <div class="container">
+                <!-- SCHOOL LOGO SLOT -->
+                <a class="navbar-brand d-flex align-items-center gap-3" href="admin-dashboard.html">
+                    <div class="brand-badge">
+                        <img src="assets/logo.jpg" class="w-100 h-100 rounded-3" />
+                    </div>
+                    <div>
+                        <div class="brand-text">Sorsogon National High School</div>
+                        <div class="brand-sub">Enrollment Portal</div>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="adminNav" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto top-menu align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="student-enrollment.html"
+                                ><i class="bi bi-journal-text me-2 ms-2"></i> Enrollment&nbsp;&nbsp;</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="student-id.html"
+                                ><i class="bi bi-person-square me-2 ms-2"></i> Virtual ID&nbsp;&nbsp;</a
+                            >
+                        </li>
+                        <li class="nav-item dropdown ms-lg-2">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle me-2 ms-2"></i> Account
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="admin-settings.html"
+                                        ><i class="bi bi-gear me-2"></i> Settings</a
+                                    >
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <a class="dropdown-item" href="index.html"
+                                        ><i class="bi bi-power me-2"></i> Logout</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container py-4 py-lg-5">
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-2 mb-4">
+                <div>
+                    <h2 class="page-title mb-1">Virtual ID</h2>
+                    <div class="small-muted">Temporary School ID</div>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <select
+                        class="form-select select-outline-brand px-4 py-2 border-2 rounded-pill no-arrow small fw-bold"
+                        style="height: 42px; width: auto"
+                        required
+                    >
+                        <option>School Year 2026 - 2027</option>
+                        <option>School Year 2025 - 2026</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card card-elev p-4 p-lg-5">
+                <!-- <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="pill fs-5"><i class="bi bi-aspect-ratio me-1"></i> CR80 (3.375" x 2.125")</span>
+                </div>
+                <div class="divider-soft mb-3"></div> -->
+                <div class="preview-shell">
+                    <div class="preview-shell">
+                        <div class="id-scale">
+                            <div id="idCard" class="id-wrap" aria-label="ID Card Preview">
+                                <div class="id-top">
+                                    <div class="id-school">
+                                        <div class="name" id="pvSchoolName">Sorsogon National High School</div>
+                                        <div class="sub">Temporary Virtual ID</div>
+                                    </div>
+                                    <div class="text-end" style="font-size: 10px; opacity: 0.9">
+                                        <div id="pvSY">SY 2026 - 2027</div>
+                                    </div>
+                                </div>
+                                <div class="id-body">
+                                    <div class="id-watermark">SNHS</div>
+                                    <div class="id-photo" id="photoBox">
+                                        <div class="ph">Upload<br />Photo</div>
+                                    </div>
+                                    <div class="id-info">
+                                        <div class="id-student" id="pvStudentName">ESPINAR, JADE</div>
+                                        <div class="id-row">
+                                            <span class="pill" id="pvStudentId">ID: 2026-00123</span>
+                                            <span class="pill" id="pvGradeSection">Grade 8 • Obedience</span>
+                                        </div>
+                                        <div class="id-meta" id="pvLRN">LRN: 123456789012</div>
+                                        <div class="id-meta" id="pvEmergency">
+                                            Emergency: Juan Dela Cruz • 09xxxxxxxxx
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Helpers
+            const $ = (id) => document.getElementById(id);
+
+            function upperName(last, first) {
+                const L = (last || "").trim().toUpperCase();
+                const F = (first || "").trim().toUpperCase();
+                return [L, F].filter(Boolean).join(", ");
+            }
+
+            function syncPreview() {
+                const schoolName = $("schoolName").value || "School Name";
+                const studentId = $("studentId").value || "—";
+                const sy = $("schoolYear").value || "—";
+                const last = $("lastName").value || "";
+                const first = $("firstName").value || "";
+                const grade = $("gradeLevel").value || "—";
+                const section = $("section").value || "—";
+                const lrn = ($("lrn").value || "").trim();
+                const emergency = ($("emergency").value || "").trim();
+
+                $("pvSchoolName").textContent = schoolName;
+                $("pvSY").textContent = sy;
+                $("pvStudentName").textContent = upperName(last, first) || "STUDENT NAME";
+                $("pvStudentId").textContent = "ID: " + studentId;
+                $("pvGradeSection").textContent = grade + " • " + section;
+
+                $("pvLRN").textContent = lrn ? "LRN: " + lrn : "LRN: —";
+                $("pvEmergency").textContent = emergency ? "Emergency: " + emergency : "Emergency: —";
+            }
+
+            // Load image files into preview boxes
+            function loadImage(file, targetBoxId, fallbackHtml) {
+                return new Promise((resolve) => {
+                    const box = $(targetBoxId);
+                    if (!file) {
+                        box.innerHTML = fallbackHtml;
+                        resolve();
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        box.innerHTML = `<img src="${reader.result}" alt="">`;
+                        resolve();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Wire inputs
+            [
+                "schoolName",
+                "studentId",
+                "schoolYear",
+                "lastName",
+                "firstName",
+                "gradeLevel",
+                "section",
+                "lrn",
+                "emergency",
+            ].forEach((id) => $(id).addEventListener("input", syncPreview));
+
+            $("photo").addEventListener("change", async (e) => {
+                const file = e.target.files && e.target.files[0];
+                await loadImage(file, "photoBox", `<div class="ph">Upload<br>Photo</div>`);
+            });
+
+            $("logo").addEventListener("change", async (e) => {
+                const file = e.target.files && e.target.files[0];
+                await loadImage(file, "logoBox", `<i class="bi bi-mortarboard-fill"></i>`);
+            });
+
+            // Reset
+            $("btnReset").addEventListener("click", async () => {
+                $("idForm").reset();
+                syncPreview();
+                await loadImage(null, "photoBox", `<div class="ph">Upload<br>Photo</div>`);
+                await loadImage(null, "logoBox", `<i class="bi bi-mortarboard-fill"></i>`);
+            });
+
+            // Generate PDF (CR80 size)
+            $("btnPDF").addEventListener("click", async () => {
+                const card = $("idCard");
+
+                // Render the card to canvas (higher scale = sharper)
+                const canvas = await html2canvas(card, {
+                    backgroundColor: "#ffffff",
+                    scale: 3, // increase if you want sharper
+                    useCORS: true,
+                });
+
+                const imgData = canvas.toDataURL("image/png");
+
+                // CR80: 3.375 x 2.125 inches
+                const { jsPDF } = window.jspdf;
+
+                // Using inches avoids weird sizing when printing
+                const pdf = new jsPDF({
+                    orientation: "landscape",
+                    unit: "in",
+                    format: [3.375, 2.125],
+                });
+
+                // Fill the whole page with the image
+                pdf.addImage(imgData, "PNG", 0, 0, 3.375, 2.125);
+
+                // Filename from student name
+                const last = ($("lastName").value || "STUDENT").trim().replace(/\s+/g, "_");
+                const first = ($("firstName").value || "").trim().replace(/\s+/g, "_");
+                const sid = ($("studentId").value || "ID").trim().replace(/\s+/g, "_");
+
+                pdf.save(`ID_${last}_${first}_${sid}.pdf`);
+            });
+
+            // Init
+            syncPreview();
+        </script>
+    </body>
+</html>

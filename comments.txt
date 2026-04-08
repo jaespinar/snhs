@@ -1,0 +1,13 @@
+- student view, may banner na nakakikita ang status (enrollment is closed, you have submitted, confirmed etc.) ang legend/remarks
+
+- student view, hindi dropdown ang school year
+
+- admin view, ilipat ang assign enrollees and upload results sa enrolles menu
+
+- change "calendar" menu to "school year" menu
+
+- isahan nalang ang assign enrollees and upload results, lagyan hover info, sa reminders and instructions
+
+- enrollees lagyan ng section column, kung meron na assigned or wala
+
+- ilipat ang filter school year and grade 7 sa left side, ang button actions sa right side

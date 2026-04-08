@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Sorsogon National High School</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+        <style>
+            body {
+                background: #f5f7f6;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* container card */
+            .login-wrapper {
+                max-width: 900px;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            }
+
+            /* left info box */
+            .login-info {
+                background: linear-gradient(135deg, #0f5132, #198754);
+                color: white;
+                padding: 40px;
+            }
+
+            /* right login box */
+            .login-form {
+                background: white;
+                padding: 40px;
+            }
+
+            .login-title {
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .form-control {
+                border-radius: 30px;
+                padding: 10px 16px;
+            }
+
+            .form-control:focus, .form-select:focus{
+                border-color: rgba(18,146,79,.45);
+                box-shadow: 0 0 0 .25rem rgba(18,146,79,.16);
+            }
+
+            .btn-brand {
+                background: #198754;
+                border: none;
+                border-radius: 30px;
+            }
+
+            .btn-brand:hover {
+                background: #157347;
+            }
+
+            .small-muted {
+                font-size: 13px;
+                opacity: 0.85;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="login-wrapper">
+            <div class="row g-0">
+                <!-- LEFT PANEL -->
+                <div class="col-md-6 login-info d-flex flex-column justify-content-between">
+                    <div>
+                        <h3 class="fw-bold fs-4 mb-0">Sorsogon National High School</h3>
+
+                        <p class="small-muted mt-0">
+                            Enrollment Portal
+                        </p>
+
+                        <hr class="border-light opacity-50" />
+
+                        <h6 class="fw-bold">Enrollment Schedule</h6>
+
+                        <ul class="small-muted">
+                            <li>Junior High School: May 18, 2026 - June 12, 2026</li>
+                            <li>Senior High School: May 20, 2026 - June 15, 2026</li>
+                        </ul>
+
+                        <h6 class="fw-bold mt-3">Contact Us</h6>
+
+                        <ul class="small-muted">
+                            <li><i class="bi bi-telephone"></i> (02) 123-4567</li>
+                            <li><i class="bi bi-phone"></i> 0921-456-091</li>
+                            <li><i class="bi bi-envelope"></i> info@school.edu</li>
+                        </ul>
+                    </div>
+
+                    <div class="small-muted mt-4">© 2026 SNHS Online Enrollment System</div>
+                </div>
+
+                <!-- LOGIN PANEL -->
+                <div class="col-md-6 login-form ">
+                    <div class="brand-badge text-center">
+                        <img src="assets/logo.jpg" class="w-50">
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" placeholder="Enter username" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Enter password" />
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <a href="student-enrollment.html" class="small text-decoration-underline" style="color: #0b6b3a">Register</a>
+                            <a href="#" class="small text-decoration-underline" style="color: #0b6b3a">Reset Password</a>
+                        </div>
+
+                        <a class="btn btn-brand w-100 py-2 rounded-pill text-white" href="admin-dashboard.html">
+                            Sign In
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
